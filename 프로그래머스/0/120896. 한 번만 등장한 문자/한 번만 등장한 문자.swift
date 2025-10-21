@@ -1,17 +1,14 @@
 import Foundation
 
 func solution(_ s:String) -> String {
-    var dict: [Character: Int] = [:]
-    s.forEach {
-        dict[$0, default: 0] += 1
+    var dict = [Character: Int]()
+    for char in s {
+        dict[char, default: 0] += 1
     }
-    
-    var result = [Character]()
-    for char in dict {
-        if char.value == 1 {
-            result.append(char.key)
+    return dict.filter { $0.value == 1 }
+        .map { String($0.key) }
+        .sorted()
+        .reduce(into: "") { result, char in
+            result += char
         }
-    }
-    result.sort()
-    return String(result)
 }
