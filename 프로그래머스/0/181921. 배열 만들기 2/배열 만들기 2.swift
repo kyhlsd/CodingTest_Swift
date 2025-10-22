@@ -1,23 +1,19 @@
 import Foundation
 
 func solution(_ l: Int, _ r: Int) -> [Int] {
-    var result: [Int] = []
-    var i = 1
-    
-    while true {
-        let binary = String(i, radix: 2)
-        
-        if let num = Int(binary.replacingOccurrences(of: "1", with: "5")) {
-            if num > r {
-                break
+    var array = [[5]]
+    let digit = Int(log(Double(r)))
+    for i in 1...digit {
+        array.append(
+            array[i-1].map {
+                [$0 * 10, $0 * 10 + 5]
             }
-            if num >= l {
-                result.append(num)
-            }
-        }
-        
-        i += 1
+                .reduce([], +)
+        )
     }
-    
-    return result.isEmpty ? [-1] : result
+    let result = array.reduce([], +).filter { $0 >= l && $0 <= r}
+    if result.isEmpty {
+        return [-1]
+    }
+    return result
 }
