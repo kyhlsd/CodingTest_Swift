@@ -10,10 +10,8 @@ for _ in 1...5 {
 
 for i in 0..<5 {
     let num = maxLength - input[i].count
-    if num > 0 {
-        for _ in 0..<num {
-            input[i].append("")
-        }
+    for _ in 0..<num {
+        input[i].append("")
     }
 }
 
