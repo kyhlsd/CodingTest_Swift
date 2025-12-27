@@ -11,16 +11,17 @@ array.forEach {
 }
 
 var maxValue = cumulativeArray[x - 1]
-var dict = [Int: Int]()
-dict[maxValue] = 1
+var count = 1
 
 for i in x..<n {
     let sum = cumulativeArray[i] - cumulativeArray[i - x]
-    if sum >= maxValue {
-        dict[sum, default: 0] += 1
+    if sum == maxValue {
+        count += 1
+    } else if sum > maxValue {
+        count = 1
         maxValue = sum
     }
 }
 
-let result = maxValue == 0 ? "SAD" : "\(maxValue)\n\(dict[maxValue]!)"
+let result = maxValue == 0 ? "SAD" : "\(maxValue)\n\(count)"
 print(result)
